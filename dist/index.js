@@ -8,16 +8,6 @@ function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'defau
 
 var axios__default = /*#__PURE__*/_interopDefaultLegacy(axios);
 
-function sum(a, b) {
-    return a + b;
-}
-
-var Customer = (function () {
-    function Customer() {
-    }
-    return Customer;
-}());
-
 var instance = axios__default["default"].create({
     baseURL: "http://localhost:8083",
 });
@@ -48,11 +38,11 @@ var RestAxios = (function () {
     RestAxios.prototype.post = function (path, entity) {
         return instance.post(path, entity);
     };
-    RestAxios.prototype.delete = function (entity) {
-        throw new Error("Method not implemented.");
+    RestAxios.prototype.delete = function (path, id) {
+        return instance.delete("".concat(path, "/").concat(id, "}"));
     };
-    RestAxios.prototype.put = function (entity) {
-        throw new Error("Method not implemented.");
+    RestAxios.prototype.put = function (path, entity) {
+        return instance.put(path, entity);
     };
     return RestAxios;
 }());
@@ -81,6 +71,22 @@ var CreateCustomerUseCase = (function () {
     return CreateCustomerUseCase;
 }());
 
+var DeleteCustomerUseCase = (function () {
+    function DeleteCustomerUseCase() {
+        this.restPort = getRestAxiosPort();
+    }
+    DeleteCustomerUseCase.getInstance = function () {
+        if (!DeleteCustomerUseCase.instance) {
+            DeleteCustomerUseCase.instance = new DeleteCustomerUseCase();
+        }
+        return DeleteCustomerUseCase.instance;
+    };
+    DeleteCustomerUseCase.prototype.deleteCustomer = function (customer) {
+        return this.restPort.delete("/v1/customer", customer.id);
+    };
+    return DeleteCustomerUseCase;
+}());
+
 var ListCustomerUseCase = (function () {
     function ListCustomerUseCase() {
         this.restPort = getRestAxiosPort();
@@ -97,8 +103,26 @@ var ListCustomerUseCase = (function () {
     return ListCustomerUseCase;
 }());
 
+var UpdateCustomerUseCase = (function () {
+    function UpdateCustomerUseCase() {
+        this.restPort = getRestAxiosPort();
+    }
+    UpdateCustomerUseCase.getInstance = function () {
+        if (!UpdateCustomerUseCase.instance) {
+            UpdateCustomerUseCase.instance = new UpdateCustomerUseCase();
+        }
+        return UpdateCustomerUseCase.instance;
+    };
+    UpdateCustomerUseCase.prototype.updateCustomer = function (customer) {
+        return this.restPort.put("/v1/customer", customer);
+    };
+    return UpdateCustomerUseCase;
+}());
+
 var createCustomerUseCaseInstance = null;
 var listCustomerUseCaseInstance = null;
+var updateCustomerUseCaseInstance = null;
+var deleteCustomerUseCaseInstance = null;
 function getCreateCustomerPort() {
     if (!createCustomerUseCaseInstance) {
         createCustomerUseCaseInstance = CreateCustomerUseCase.getInstance();
@@ -111,18 +135,38 @@ function getListCustomerPort() {
     }
     return listCustomerUseCaseInstance;
 }
+function getUpdateCustomerPort() {
+    if (!updateCustomerUseCaseInstance) {
+        updateCustomerUseCaseInstance = UpdateCustomerUseCase.getInstance();
+    }
+    return updateCustomerUseCaseInstance;
+}
+function getDeleteCustomerPort() {
+    if (!deleteCustomerUseCaseInstance) {
+        deleteCustomerUseCaseInstance = DeleteCustomerUseCase.getInstance();
+    }
+    return deleteCustomerUseCaseInstance;
+}
 
 var createCustomer = function (customer) {
-    var createUserPort = getCreateCustomerPort();
-    return createUserPort.createCustomer(customer);
+    var createCustomerPort = getCreateCustomerPort();
+    return createCustomerPort.createCustomer(customer);
 };
 var listCustomer = function () {
-    var listUserPort = getListCustomerPort();
-    return listUserPort.listCustomer();
+    var listCustomerPort = getListCustomerPort();
+    return listCustomerPort.listCustomer();
+};
+var updateCustomer = function (customer) {
+    var updateCustomerPort = getUpdateCustomerPort();
+    return updateCustomerPort.updateCustomer(customer);
+};
+var deleteCustomer = function (customer) {
+    var deleteCustomerPort = getDeleteCustomerPort();
+    return deleteCustomerPort.deleteCustomer(customer);
 };
 
-exports.Customer = Customer;
 exports.createCustomer = createCustomer;
+exports.deleteCustomer = deleteCustomer;
 exports.listCustomer = listCustomer;
-exports.sum = sum;
+exports.updateCustomer = updateCustomer;
 //# sourceMappingURL=index.js.map

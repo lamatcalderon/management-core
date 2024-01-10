@@ -1,5 +1,6 @@
 export class Customer {
-    customerId: number;
-    customerName: string;
-    customerLastName: string;
+    id: number;
+    name: string;
+    lastName: string;
+    dni: string
 }

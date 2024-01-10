@@ -7,8 +7,8 @@
     "name": "Luis Amat",
     "email": "lamatcalderon@gmail.com"
   },
-  "repository": "  https://github.com/lamatcalderon/management-core",
-  "bugs": "  https://github.com/lamatcalderon/management-core/issues",
+  "repository": "https://github.com/lamatcalderon/management-core",
+  "bugs": "https://github.com/lamatcalderon/management-core/issues",
   "main": "dist/index.js",
   "typings": "dist/src/index.d.ts",
   "files": [

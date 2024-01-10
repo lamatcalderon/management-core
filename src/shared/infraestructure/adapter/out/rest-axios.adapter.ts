@@ -45,10 +45,10 @@ export class RestAxios implements RestPort {
     post<T>(path: string, entity: T): Promise<T> {
         return instance.post(path, entity);
     }
-    delete<T>(entity: T): Promise<any> {
-        throw new Error("Method not implemented.");
+    delete<T>(path: string, id: number): Promise<any> {
+        return instance.delete(`${path}/${id}}`);
     }
-    put<T>(entity: T): Promise<any> {
-        throw new Error("Method not implemented.");
+    put<T>(path: string, entity: T): Promise<any> {
+        return instance.put(path, entity);
     }
 }

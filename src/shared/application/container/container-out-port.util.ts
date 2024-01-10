@@ -1,5 +1,5 @@
-import { RestPort } from '../shared/infraestructure/port/out/rest.port';
-import { RestAxios } from '../shared/infraestructure/adapter/out/rest-axios.adapter';
+import { RestPort } from '../../infraestructure/port/out/rest.port';
+import { RestAxios } from '../../infraestructure/adapter/out/rest-axios.adapter';
 
 let restAxiosInstance: RestPort | null = null;
 
