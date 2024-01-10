@@ -46,7 +46,7 @@ export class RestAxios implements RestPort {
         return instance.post(path, entity);
     }
     delete<T>(path: string, id: number): Promise<any> {
-        return instance.delete(`${path}/${id}}`);
+        return instance.delete(`${path}/${id}`);
     }
     put<T>(path: string, entity: T): Promise<any> {
         return instance.put(path, entity);

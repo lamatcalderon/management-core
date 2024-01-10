@@ -39,7 +39,7 @@ var RestAxios = (function () {
         return instance.post(path, entity);
     };
     RestAxios.prototype.delete = function (path, id) {
-        return instance.delete("".concat(path, "/").concat(id, "}"));
+        return instance.delete("".concat(path, "/").concat(id));
     };
     RestAxios.prototype.put = function (path, entity) {
         return instance.put(path, entity);
