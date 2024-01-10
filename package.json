@@ -1,0 +1,56 @@
+{
+  "name": "management-core",
+  "description": "management-core",
+  "version": "0.0.1",
+  "private": false,
+  "author": {
+    "name": "Luis Amat",
+    "email": "lamatcalderon@gmail.com"
+  },
+  "repository": "  https://github.com/lamatcalderon/management-core",
+  "bugs": "  https://github.com/lamatcalderon/management-core/issues",
+  "main": "dist/index.js",
+  "typings": "dist/src/index.d.ts",
+  "files": [
+    "dist/*"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --mode=production",
+    "build-library": "rollup -c"
+  },
+  "keywords": [],
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "@rollup/plugin-commonjs": "^22.0.0",
+    "@rollup/plugin-node-resolve": "^13.3.0",
+    "@types/webpack-env": "^1.16.4",
+    "dts-bundle": "^0.7.3",
+    "inversify": "^6.0.2",
+    "moment": "^2.29.3",
+    "reflect-metadata": "^0.2.1",
+    "rollup-plugin-clear": "^2.0.7",
+    "rollup-plugin-node-builtins": "^2.1.2",
+    "rollup-plugin-node-globals": "^1.4.0",
+    "rollup-plugin-scss": "^3.0.0",
+    "rollup-plugin-typescript2": "^0.31.2",
+    "uninstall": "0.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.32",
+    "@types/webpack": "^5.28.0",
+    "@webpack-cli/generators": "^2.4.2",
+    "clean-webpack-plugin": "^4.0.0",
+    "copy-webpack-plugin": "^10.2.4",
+    "declaration-bundler-webpack-plugin": "^1.0.3",
+    "rollup": "^2.70.2",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-vue": "^6.0.0",
+    "ts-loader": "^9.3.0",
+    "typescript": "^4.6.4",
+    "webpack": "^5.72.1",
+    "webpack-cli": "^4.9.2",
+    "wepack-cli": "0.0.1-security"
+  }
+}
