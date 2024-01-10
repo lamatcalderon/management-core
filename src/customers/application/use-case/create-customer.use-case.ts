@@ -1,7 +1,7 @@
 import { CreateCustomerPort } from "../../infraestructure/port/in/create-customer.port";
 import { Customer } from "../../domain/customer.domain";
 
-import { RestPort } from "../../infraestructure/port/out/rest.port";
+import { RestPort } from "../../../shared/infraestructure/port/out/rest.port";
 import { getRestAxiosPort } from "../../../util/container-out-port.util";
 
 export class CreateCustomerUseCase implements CreateCustomerPort {
