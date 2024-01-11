@@ -52,3 +52,5 @@ export class RestAxios implements RestPort {
         return instance.put(path, entity);
     }
 }
+
+export default axios;

@@ -1,3 +1,4 @@
+import axios from "axios";
 import { RestPort } from "../../port/out/rest.port";
 export declare const instance: import("axios").AxiosInstance;
 export declare class RestAxios implements RestPort {
@@ -9,3 +10,4 @@ export declare class RestAxios implements RestPort {
     delete<T>(path: string): Promise<any>;
     put<T>(path: string, entity: T): Promise<any>;
 }
+export default axios;
