@@ -5,5 +5,5 @@ export declare class DeleteCustomerUseCase implements DeleteCustomerPort {
     private restPort;
     private constructor();
     static getInstance(): DeleteCustomerUseCase;
-    deleteCustomer(customer: Customer): Promise<Customer>;
+    deleteCustomer(id: number): Promise<Customer>;
 }

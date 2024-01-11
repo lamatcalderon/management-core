@@ -38,8 +38,8 @@ var RestAxios = (function () {
     RestAxios.prototype.post = function (path, entity) {
         return instance.post(path, entity);
     };
-    RestAxios.prototype.delete = function (path, id) {
-        return instance.delete("".concat(path, "/").concat(id));
+    RestAxios.prototype.delete = function (path) {
+        return instance.delete(path);
     };
     RestAxios.prototype.put = function (path, entity) {
         return instance.put(path, entity);
@@ -81,10 +81,26 @@ var DeleteCustomerUseCase = (function () {
         }
         return DeleteCustomerUseCase.instance;
     };
-    DeleteCustomerUseCase.prototype.deleteCustomer = function (customer) {
-        return this.restPort.delete("/v1/customer", customer.id);
+    DeleteCustomerUseCase.prototype.deleteCustomer = function (id) {
+        return this.restPort.delete("/v1/customer/".concat(id));
     };
     return DeleteCustomerUseCase;
+}());
+
+var GetCustomerUseCase = (function () {
+    function GetCustomerUseCase() {
+        this.restPort = getRestAxiosPort();
+    }
+    GetCustomerUseCase.getInstance = function () {
+        if (!GetCustomerUseCase.instance) {
+            GetCustomerUseCase.instance = new GetCustomerUseCase();
+        }
+        return GetCustomerUseCase.instance;
+    };
+    GetCustomerUseCase.prototype.getCustomer = function (id) {
+        return this.restPort.get("/v1/customer/".concat(id));
+    };
+    return GetCustomerUseCase;
 }());
 
 var ListCustomerUseCase = (function () {
@@ -123,50 +139,64 @@ var createCustomerUseCaseInstance = null;
 var listCustomerUseCaseInstance = null;
 var updateCustomerUseCaseInstance = null;
 var deleteCustomerUseCaseInstance = null;
-function getCreateCustomerPort() {
+var getCustomerUseCaseInstance = null;
+function iCreateCustomerPort() {
     if (!createCustomerUseCaseInstance) {
         createCustomerUseCaseInstance = CreateCustomerUseCase.getInstance();
     }
     return createCustomerUseCaseInstance;
 }
-function getListCustomerPort() {
+function iListCustomerPort() {
     if (!listCustomerUseCaseInstance) {
         listCustomerUseCaseInstance = ListCustomerUseCase.getInstance();
     }
     return listCustomerUseCaseInstance;
 }
-function getUpdateCustomerPort() {
+function iUpdateCustomerPort() {
     if (!updateCustomerUseCaseInstance) {
         updateCustomerUseCaseInstance = UpdateCustomerUseCase.getInstance();
     }
     return updateCustomerUseCaseInstance;
 }
-function getDeleteCustomerPort() {
+function iDeleteCustomerPort() {
     if (!deleteCustomerUseCaseInstance) {
         deleteCustomerUseCaseInstance = DeleteCustomerUseCase.getInstance();
     }
     return deleteCustomerUseCaseInstance;
 }
+function iGetCustomerPort() {
+    if (!getCustomerUseCaseInstance) {
+        getCustomerUseCaseInstance = GetCustomerUseCase.getInstance();
+    }
+    return getCustomerUseCaseInstance;
+}
 
 var createCustomer = function (customer) {
-    var createCustomerPort = getCreateCustomerPort();
+    var createCustomerPort = iCreateCustomerPort();
     return createCustomerPort.createCustomer(customer);
 };
 var listCustomer = function () {
-    var listCustomerPort = getListCustomerPort();
+    var listCustomerPort = iListCustomerPort();
     return listCustomerPort.listCustomer();
 };
 var updateCustomer = function (customer) {
-    var updateCustomerPort = getUpdateCustomerPort();
+    var updateCustomerPort = iUpdateCustomerPort();
     return updateCustomerPort.updateCustomer(customer);
 };
-var deleteCustomer = function (customer) {
-    var deleteCustomerPort = getDeleteCustomerPort();
-    return deleteCustomerPort.deleteCustomer(customer);
+var deleteCustomer = function (id) {
+    var deleteCustomerPort = iDeleteCustomerPort();
+    return deleteCustomerPort.deleteCustomer(id);
+};
+var getCustomer = function (id) {
+    var getCustomerPort = iGetCustomerPort();
+    return getCustomerPort.getCustomer(id);
 };
 
+exports.RestAxios = RestAxios;
 exports.createCustomer = createCustomer;
 exports.deleteCustomer = deleteCustomer;
+exports.getCustomer = getCustomer;
+exports.instance = instance;
 exports.listCustomer = listCustomer;
 exports.updateCustomer = updateCustomer;
 //# sourceMappingURL=index.js.map

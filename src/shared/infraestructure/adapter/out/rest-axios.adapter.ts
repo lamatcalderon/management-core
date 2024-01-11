@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig } from "axios";
 
 import { RestPort } from "../../port/out/rest.port";
 
-const instance = axios.create({
+export const instance = axios.create({
     baseURL: "http://localhost:8083",
 });
 
@@ -45,8 +45,8 @@ export class RestAxios implements RestPort {
     post<T>(path: string, entity: T): Promise<T> {
         return instance.post(path, entity);
     }
-    delete<T>(path: string, id: number): Promise<any> {
-        return instance.delete(`${path}/${id}`);
+    delete<T>(path: string): Promise<any> {
+        return instance.delete(path);
     }
     put<T>(path: string, entity: T): Promise<any> {
         return instance.put(path, entity);

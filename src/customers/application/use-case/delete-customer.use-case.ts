@@ -18,7 +18,7 @@ export class DeleteCustomerUseCase implements DeleteCustomerPort {
         return DeleteCustomerUseCase.instance;
     }
 
-    deleteCustomer(customer: Customer): Promise<Customer> {        
-        return this.restPort.delete("/v1/customer", customer.id);
+    deleteCustomer(id: number): Promise<Customer> {        
+        return this.restPort.delete(`/v1/customer/${id}`);
     }
 }
